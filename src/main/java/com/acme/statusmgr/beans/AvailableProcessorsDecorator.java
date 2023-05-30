@@ -2,10 +2,17 @@ package com.acme.statusmgr.beans;
 
 public class AvailableProcessorsDecorator implements ServerStatus {
     private ServerStatus serverStatus;
-    public AvailableProcessorsDecorator(ServerStatus serverStatus)
+    private ServerFacadeInterface dataSource;
+    public AvailableProcessorsDecorator(ServerStatus serverStatus, ServerFacadeInterface dataSource)
     {
         this.serverStatus = serverStatus;
+        this.dataSource = dataSource;
     }
+
+    public void setDataSource(ServerFacadeInterface dataSource) {
+        this.dataSource = dataSource;
+    }
+
     @Override
     public String getContentHeader() {
         return serverStatus.getContentHeader();
@@ -18,7 +25,7 @@ public class AvailableProcessorsDecorator implements ServerStatus {
 
     @Override
     public String getStatusDesc() {
-        return serverStatus.getStatusDesc() + ", and there are " + Runtime.getRuntime().availableProcessors()
+        return serverStatus.getStatusDesc() + ", and there are " + dataSource.getAvailableProcessers()
                 + " processors available";
     }
 

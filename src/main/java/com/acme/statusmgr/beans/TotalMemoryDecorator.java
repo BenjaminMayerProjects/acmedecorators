@@ -2,9 +2,15 @@ package com.acme.statusmgr.beans;
 
 public class TotalMemoryDecorator implements ServerStatus {
     private ServerStatus serverStatus;
-    public TotalMemoryDecorator(ServerStatus serverStatus)
+    private ServerFacadeInterface dataSource;
+    public TotalMemoryDecorator(ServerStatus serverStatus, ServerFacadeInterface dataSource)
     {
         this.serverStatus = serverStatus;
+        this.dataSource =dataSource;
+    }
+    public void setDataSource(ServerFacadeInterface dataSource)
+    {
+        this.dataSource = dataSource;
     }
 
     public String getContentHeader() {

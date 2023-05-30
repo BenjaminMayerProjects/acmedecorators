@@ -3,10 +3,17 @@ package com.acme.statusmgr.beans;
 public class FreeJVMMemoryDecorator implements ServerStatus {
 
         private ServerStatus serverStatus;
-        public FreeJVMMemoryDecorator(ServerStatus serverStatus)
+        private ServerFacadeInterface dataSource;
+
+        public FreeJVMMemoryDecorator(ServerStatus serverStatus, ServerFacadeInterface dataSource)
         {
             this.serverStatus = serverStatus;
+            this.dataSource = dataSource;
         }
+    public void setDataSource(ServerFacadeInterface dataSource)
+    {
+        this.dataSource = dataSource;
+    }
         @Override
         public String getContentHeader() {
             return serverStatus.getContentHeader();
@@ -19,7 +26,7 @@ public class FreeJVMMemoryDecorator implements ServerStatus {
 
         @Override
         public String getStatusDesc() {
-            return serverStatus.getStatusDesc() + ", and there are " + Runtime.getRuntime().freeMemory() +
+            return serverStatus.getStatusDesc() + ", and there are " + dataSource.getFreeJVMemory() +
                     " bytes of JVM memory free";
         }
 

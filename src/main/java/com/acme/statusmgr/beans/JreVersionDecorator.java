@@ -3,9 +3,15 @@ package com.acme.statusmgr.beans;
 public class JreVersionDecorator implements ServerStatus {
 
         private ServerStatus serverStatus;
-        public JreVersionDecorator(ServerStatus serverStatus)
+        private ServerFacadeInterface dataSource;
+        public JreVersionDecorator(ServerStatus serverStatus, ServerFacadeInterface dataSource)
         {
             this.serverStatus = serverStatus;
+            this.dataSource = dataSource;
+        }
+        public void setDataSource(ServerFacadeInterface dataSource)
+        {
+        this.dataSource = dataSource;
         }
         @Override
         public String getContentHeader() {

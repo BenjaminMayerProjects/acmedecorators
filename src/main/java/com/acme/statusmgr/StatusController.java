@@ -31,6 +31,7 @@ public class StatusController {
 
     protected static final String template = "Server Status requested by %s";
     protected final AtomicLong counter = new AtomicLong();
+    protected ServerFacadeInterface dataSource;
 
     /**
      * Process a request for server status information
@@ -66,25 +67,25 @@ public class StatusController {
         if (details != null) {
             Logger logger = LoggerFactory.getLogger("StatusController");
             logger.info("Details were provided: " + Arrays.toString(details.toArray()));
-
+            dataSource = new ServerFacade();
             for (String detail : details) {
 
 
                 if (detail.equals("totalJVMMemory")) {
-                    detailedStatus= new TotalMemoryDecorator(detailedStatus);
+                    detailedStatus= new TotalMemoryDecorator(detailedStatus, dataSource);
                 }
                 else if (detail.equals("availableProcessors")) {
-                    detailedStatus= new AvailableProcessorsDecorator(detailedStatus);
+                    detailedStatus= new AvailableProcessorsDecorator(detailedStatus, dataSource);
                 }
                 else if (detail.equals("tempLocation")) {
-                    detailedStatus= new TempLocationDecorator(detailedStatus);
+                    detailedStatus= new TempLocationDecorator(detailedStatus, dataSource);
                 }
 
                 else if (detail.equals("jreVersion")) {
-                    detailedStatus= new JreVersionDecorator(detailedStatus);
+                    detailedStatus= new JreVersionDecorator(detailedStatus, dataSource);
                 }
                 else if (detail.equals("freeJVMMemory")) {
-                    detailedStatus= new FreeJVMMemoryDecorator(detailedStatus);
+                    detailedStatus= new FreeJVMMemoryDecorator(detailedStatus, dataSource);
 
                 }
                 else
@@ -96,6 +97,10 @@ public class StatusController {
 
 
         }
-        return detailedStatus.getServerStatus();
+        return detailedStatus;
+    }
+    public void setDataSource(ServerFacadeInterface dataSource)
+    {
+        this.dataSource = dataSource;
     }
 }
