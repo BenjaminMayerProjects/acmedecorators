@@ -13,7 +13,7 @@ public class TotalMemoryDecorator extends ServerStatus {
 
     @Override
     public Integer getRequestCost() {
-        return serverStatus.getRequestCost() + 13;
+        return serverStatus.getRequestCost();// + 13;
     }
 
     @Override

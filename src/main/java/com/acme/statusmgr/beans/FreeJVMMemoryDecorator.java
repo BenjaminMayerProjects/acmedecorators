@@ -14,7 +14,7 @@ public class FreeJVMMemoryDecorator extends ServerStatus{
 
         @Override
         public Integer getRequestCost() {
-            return serverStatus.getRequestCost() + 7;
+            return serverStatus.getRequestCost();//+ 7;
         }
 
         @Override

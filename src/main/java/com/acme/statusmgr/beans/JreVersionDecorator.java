@@ -14,7 +14,7 @@ public class JreVersionDecorator extends ServerStatus{
 
         @Override
         public Integer getRequestCost() {
-            return serverStatus.getRequestCost() + 19;
+            return serverStatus.getRequestCost() ;//+ 19;
         }
 
         @Override
@@ -31,4 +31,4 @@ public class JreVersionDecorator extends ServerStatus{
     }
 
 
-    
+

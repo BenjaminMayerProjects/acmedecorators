@@ -14,7 +14,7 @@ public class TempLocationDecorator extends ServerStatus
 
     @Override
     public Integer getRequestCost() {
-        return serverStatus.getRequestCost() + 29;
+        return serverStatus.getRequestCost();//+ 29;
     }
 
     @Override
