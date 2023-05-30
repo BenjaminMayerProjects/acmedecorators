@@ -31,5 +31,7 @@ public class ServerFacade   {
         serverStatus = new TotalMemoryDecorator(serverStatus);
     }
 
-
+    public ServerStatus getServerStatus() {
+        return serverStatus;
+    }
 }

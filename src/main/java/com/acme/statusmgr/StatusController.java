@@ -95,6 +95,6 @@ public class StatusController {
 
 
         }
-        return detailedStatus;
+        return detailedStatus.getServerStatus();
     }
 }
