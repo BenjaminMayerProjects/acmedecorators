@@ -59,7 +59,7 @@ public class StatusController {
             @RequestParam(value = "name", defaultValue = "Anonymous") String name,
             @RequestParam List<String> details) {
 
-        ServerStatus detailedStatus = new BaseServerStatus(counter.incrementAndGet(),
+        ServerFacade detailedStatus = new ServerFacade(counter.incrementAndGet(),
                 String.format(template, name));
 
         if (details != null) {
@@ -70,20 +70,20 @@ public class StatusController {
 
 
                 if (detail.equals("totalJVMMemory")) {
-                    detailedStatus = new TotalMemoryDecorator(detailedStatus);
+                    detailedStatus.addTotalMemory();
                 }
                 else if (detail.equals("availableProcessors")) {
-                    detailedStatus = new AvailableProcessorsDecorator(detailedStatus);
+                    detailedStatus.addAvailableProcessers();
                 }
                 else if (detail.equals("tempLocation")) {
-                    detailedStatus = new TempLocationDecorator(detailedStatus);
+                    detailedStatus.addTempLocation();
                 }
 
                 else if (detail.equals("jreVersion")) {
-                    detailedStatus = new JreVersionDecorator(detailedStatus);
+                    detailedStatus.addJreVersion();
                 }
                 else if (detail.equals("freeJVMMemory")) {
-                    detailedStatus = new FreeJVMMemoryDecorator(detailedStatus);
+                    detailedStatus.addFreeJVMMemory();
 
                 }
                 else
