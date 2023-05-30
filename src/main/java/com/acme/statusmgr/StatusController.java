@@ -55,7 +55,7 @@ public class StatusController {
      *      * @apiNote TODO since Spring picks apart the object returned with Reflection and doesn't care what the return-object's type is, we can change the type of object we return if necessary
      */
     @RequestMapping("/status/detailed")
-    public ServerStatus getDetailedStatus(
+    public ServerStatusInterface getDetailedStatus(
             @RequestParam(value = "name", defaultValue = "Anonymous") String name,
             @RequestParam List<String> details) {
 
