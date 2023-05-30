@@ -1,8 +1,9 @@
 package com.acme.statusmgr.beans;
 
-public class TotalMemoryDecorator extends ServerStatus {
+public class TempLocationDecorator extends ServerStatus
+{
     private ServerStatus serverStatus;
-    public TotalMemoryDecorator(ServerStatus serverStatus)
+    public TempLocationDecorator(ServerStatus serverStatus)
     {
         this.serverStatus = serverStatus;
     }
@@ -18,8 +19,7 @@ public class TotalMemoryDecorator extends ServerStatus {
 
     @Override
     public String getStatusDesc() {
-        return serverStatus.getStatusDesc() + " and there are " + Runtime.getRuntime().freeMemory() +
-                " bytes of JVM memory free";
+        return serverStatus.getStatusDesc() + ", and the server's temp file location is " + System.getenv("TEMP");
     }
 
     @Override
@@ -28,3 +28,5 @@ public class TotalMemoryDecorator extends ServerStatus {
     }
 
 }
+
+

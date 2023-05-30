@@ -1,7 +1,6 @@
 package com.acme.statusmgr;
 
-import com.acme.statusmgr.beans.ServerStatus;
-import com.acme.statusmgr.beans.TotalMemoryDecorator;
+import com.acme.statusmgr.beans.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,20 +59,38 @@ public class StatusController {
             @RequestParam(value = "name", defaultValue = "Anonymous") String name,
             @RequestParam List<String> details) {
 
-        ServerStatus detailedStatus = new ServerStatus();
+        ServerStatus detailedStatus = new ServerStatus(counter.incrementAndGet(),
+                String.format(template, name));
 
         if (details != null) {
             Logger logger = LoggerFactory.getLogger("StatusController");
             logger.info("Details were provided: " + Arrays.toString(details.toArray()));
 
             //todo Should do something with all these details that were requested
-            for ( String detail: details)
+            if (details.contains("freeJVMMemory"))
             {
-                if (detail.equals("freeJVMMemory"))
-                {
-                    detailedStatus = new TotalMemoryDecorator(detailedStatus);
-                }
+                detailedStatus = new TotalMemoryDecorator(detailedStatus);
             }
+            if (details.contains("availableProcessors"))
+            {
+                detailedStatus = new AvailableProcessorsDecorator(detailedStatus);
+            }
+            if (details.contains("tempLocation"))
+            {
+                detailedStatus = new TempLocationDecorator(detailedStatus);
+            }
+
+            if (details.contains("jreVersion"))
+            {
+                detailedStatus = new JreVersionDecorator(detailedStatus);
+            }
+            if (details.contains("freeJVMMemory"))
+            {
+                detailedStatus = new FreeJVMMemoryDecorator(detailedStatus);
+
+            }
+
+
 
         }
         return detailedStatus; //todo shouldn't just return null
