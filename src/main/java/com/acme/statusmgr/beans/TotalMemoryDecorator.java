@@ -1,6 +1,6 @@
 package com.acme.statusmgr.beans;
 
-public class TotalMemoryDecorator extends ServerStatus {
+public class TotalMemoryDecorator implements ServerStatus {
     private ServerStatus serverStatus;
     public TotalMemoryDecorator(ServerStatus serverStatus)
     {

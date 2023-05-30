@@ -41,7 +41,7 @@ public class StatusController {
      */
     @RequestMapping("/status")
     public ServerStatus getStatus(@RequestParam(value = "name", defaultValue = "Anonymous") String name) {
-        return new ServerStatus(counter.incrementAndGet(),
+        return new BaseServerStatus(counter.incrementAndGet(),
                 String.format(template, name));
     }
 
@@ -55,44 +55,46 @@ public class StatusController {
      *      * @apiNote TODO since Spring picks apart the object returned with Reflection and doesn't care what the return-object's type is, we can change the type of object we return if necessary
      */
     @RequestMapping("/status/detailed")
-    public ServerStatusInterface getDetailedStatus(
+    public ServerStatus getDetailedStatus(
             @RequestParam(value = "name", defaultValue = "Anonymous") String name,
             @RequestParam List<String> details) {
 
-        ServerStatus detailedStatus = new ServerStatus(counter.incrementAndGet(),
+        ServerStatus detailedStatus = new BaseServerStatus(counter.incrementAndGet(),
                 String.format(template, name));
 
         if (details != null) {
             Logger logger = LoggerFactory.getLogger("StatusController");
             logger.info("Details were provided: " + Arrays.toString(details.toArray()));
 
-            //todo Should do something with all these details that were requested
-            if (details.contains("freeJVMMemory"))
-            {
-                detailedStatus = new TotalMemoryDecorator(detailedStatus);
-            }
-            if (details.contains("availableProcessors"))
-            {
-                detailedStatus = new AvailableProcessorsDecorator(detailedStatus);
-            }
-            if (details.contains("tempLocation"))
-            {
-                detailedStatus = new TempLocationDecorator(detailedStatus);
-            }
+            for (String detail : details) {
 
-            if (details.contains("jreVersion"))
-            {
-                detailedStatus = new JreVersionDecorator(detailedStatus);
-            }
-            if (details.contains("freeJVMMemory"))
-            {
-                detailedStatus = new FreeJVMMemoryDecorator(detailedStatus);
 
+                if (detail.equals("totalJVMMemory")) {
+                    detailedStatus = new TotalMemoryDecorator(detailedStatus);
+                }
+                else if (detail.equals("availableProcessors")) {
+                    detailedStatus = new AvailableProcessorsDecorator(detailedStatus);
+                }
+                else if (detail.equals("tempLocation")) {
+                    detailedStatus = new TempLocationDecorator(detailedStatus);
+                }
+
+                else if (detail.equals("jreVersion")) {
+                    detailedStatus = new JreVersionDecorator(detailedStatus);
+                }
+                else if (detail.equals("freeJVMMemory")) {
+                    detailedStatus = new FreeJVMMemoryDecorator(detailedStatus);
+
+                }
+                else
+                {
+                    //TODO error code
+                }
             }
 
 
 
         }
-        return detailedStatus; //todo shouldn't just return null
+        return detailedStatus;
     }
 }

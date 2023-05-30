@@ -1,6 +1,6 @@
 package com.acme.statusmgr.beans;
 
-public class JreVersionDecorator extends ServerStatus{
+public class JreVersionDecorator implements ServerStatus {
 
         private ServerStatus serverStatus;
         public JreVersionDecorator(ServerStatus serverStatus)

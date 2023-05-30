@@ -1,6 +1,6 @@
 package com.acme.statusmgr.beans;
 
-public class TempLocationDecorator extends ServerStatus
+public class TempLocationDecorator implements ServerStatus
 {
     private ServerStatus serverStatus;
     public TempLocationDecorator(ServerStatus serverStatus)

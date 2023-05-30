@@ -1,6 +1,6 @@
 package com.acme.statusmgr.beans;
 
-public class FreeJVMMemoryDecorator extends ServerStatus{
+public class FreeJVMMemoryDecorator implements ServerStatus {
 
         private ServerStatus serverStatus;
         public FreeJVMMemoryDecorator(ServerStatus serverStatus)

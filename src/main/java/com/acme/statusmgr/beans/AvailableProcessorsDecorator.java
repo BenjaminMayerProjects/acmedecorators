@@ -1,6 +1,6 @@
 package com.acme.statusmgr.beans;
 
-public class AvailableProcessorsDecorator extends ServerStatus{
+public class AvailableProcessorsDecorator implements ServerStatus {
     private ServerStatus serverStatus;
     public AvailableProcessorsDecorator(ServerStatus serverStatus)
     {
