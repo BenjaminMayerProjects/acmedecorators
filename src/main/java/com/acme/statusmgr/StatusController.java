@@ -46,6 +46,7 @@ public class StatusController {
      */
     @RequestMapping("/status")
     public ServerStatus getStatus(@RequestParam(value = "name", defaultValue = "Anonymous") String name) {
+
         return new BaseServerStatus(counter.incrementAndGet(),
                 String.format(template, name));
     }
@@ -72,6 +73,7 @@ public class StatusController {
             Logger logger = LoggerFactory.getLogger("StatusController");
             logger.info("Details were provided: " + Arrays.toString(details.toArray()));
             for (String detail : details) {
+                logger.info("Status item " + detail + " being  added to ServerStatus");
 
 
                 if (detail.equals("totalJVMMemory")) {
@@ -93,6 +95,7 @@ public class StatusController {
                 }
                 else
                 {
+                    logger.info("Failure: invalid detail provided" + detail);
                     throw new ResponseStatusException(
                             HttpStatus.BAD_REQUEST, "Invalid details option: " + detail);
                 }
@@ -103,7 +106,9 @@ public class StatusController {
         }
         return detailedStatus;
     }
-    public static void setSystemInfoFacade(ServerFacadeInterface serverFacade){
+    public static void setServerFacade(ServerFacadeInterface serverFacade){
         StatusController.dataSource = serverFacade;
+        Logger logger = LoggerFactory.getLogger("StatusController");
+        logger.info("Server Facade has been changed.");
     }
 }
