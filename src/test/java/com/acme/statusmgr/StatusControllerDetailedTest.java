@@ -15,6 +15,8 @@
  */
 package com.acme.statusmgr;
 
+import com.acme.statusmgr.beans.ServerFacadeInterface;
+import com.acme.statusmgr.beans.ServerTestFacade;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -35,6 +37,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 public class StatusControllerDetailedTest {
+    private ServerFacadeInterface dataSource;
 
     @Autowired
     private MockMvc mockMvc;
@@ -44,7 +47,8 @@ public class StatusControllerDetailedTest {
      */
     @BeforeAll
     public static void beforeAll() {
-       //todo StatusController.setSystemInfoFacade(null /* todo: Inject appropriate object */);
+
+        StatusController.setServerFacade(new ServerTestFacade());
     }
 
 
