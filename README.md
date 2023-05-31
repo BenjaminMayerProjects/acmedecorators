@@ -29,6 +29,18 @@ The `name` parameter value overrides the default value of “Anonymous” and is
 `---- [source, json]
 {"id":2,"contentHeader":"Server Status requested by Moishe","statusDesc":"Server is up"}
 ----`
+New: You can now get different sorts of system statuses with the detailed parameter and
+passing in, separated by commas, statuses such as the JRE version, total memory,
+free memory, the temporary location of the file, and available processes.
+
+Here is an example of a URL request with all supported details:
+
+http://localhost:8080/server/status/detailed?name=Yankel&details=availableProcessors,freeJVMMemory,totalJVMMemory,jreVersion,tempLocation
+
+Links to an external site.The result of this in a browser should be something like the following:
+
+{"id":8,"contentHeader":"Server Status requested by Yankel","requestCost":72,"statusDesc":"Server is up, and there are 4 processors available, and there are 127268272 bytes of JVM memory free, and there is a total of 159383552 bytes of JVM memory, and the JRE version is 15.0.2+7-27, and the server's temp file location is M:\\AppData\\Local\\Temp"}
+
 
 **--> Syntax for URLS:**
 *    All start with /server

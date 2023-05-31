@@ -58,7 +58,7 @@ public class StatusController {
      * @param name    optional param identifying the requester
      * @param details optional param with a list of server status details being requested
      * @return a ServerStatus object containing the info to be returned to the requestor
-     *      * @apiNote TODO since Spring picks apart the object returned with Reflection and doesn't care what the return-object's type is, we can change the type of object we return if necessary
+     *      * @apiNote
      */
     @RequestMapping("/status/detailed")
     public ServerStatus getDetailedStatus(
@@ -72,6 +72,13 @@ public class StatusController {
         if (details != null) {
             Logger logger = LoggerFactory.getLogger("StatusController");
             logger.info("Details were provided: " + Arrays.toString(details.toArray()));
+            /**
+             * Processes the details that were given to the method by checking if each detail matches
+             * one of the details in our specs and passing it to the appropriate decorator. If
+             * none of the details match, a ResponseStatusException is thrown.
+             *
+             *
+             */
             for (String detail : details) {
                 logger.info("Status item " + detail + " being  added to ServerStatus");
 

@@ -4,6 +4,8 @@ import com.acme.servermgr.ServerManager;
 
 /**
  * A POJO that represents Server Status and can be returned to Spring as the result of a request.
+ * This is the base case, so to speak, of our ServerStatus object. This Server contains the core
+ * code that will be built on by other decorators.
  */
 public class BaseServerStatus implements ServerStatus {
     private long id;                // Unique identifier of request, sequential number

@@ -1,7 +1,12 @@
 package com.acme.statusmgr.beans;
-
+/**
+ * ServerTestFacade helps us test our code by giving us constant values to check whether our decorators
+ * are working as they should along with the general functioning of our program.
+ *
+ *
+ */
 public class ServerTestFacade implements ServerFacadeInterface{
-    public String getAvailableProcessers()
+    public String getAvailableProcessors()
     {
         return "4";
     }
