@@ -20,12 +20,12 @@ public class JreVersionDecorator implements ServerStatus {
 
         @Override
         public Integer getRequestCost() {
-            return serverStatus.getRequestCost() ;//+ 19;
+            return serverStatus.getRequestCost() + 19;
         }
 
         @Override
         public String getStatusDesc() {
-            return serverStatus.getStatusDesc() + ", and the JRE version is " + Runtime.version();
+            return serverStatus.getStatusDesc() + ", and the JRE version is " + dataSource.getJre();
         }
 
 

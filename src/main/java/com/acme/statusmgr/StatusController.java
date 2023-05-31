@@ -69,7 +69,6 @@ public class StatusController {
         if (details != null) {
             Logger logger = LoggerFactory.getLogger("StatusController");
             logger.info("Details were provided: " + Arrays.toString(details.toArray()));
-            dataSource = new ServerFacade();
             for (String detail : details) {
 
 
@@ -101,7 +100,7 @@ public class StatusController {
         }
         return detailedStatus;
     }
-    public static void setSystemInfoFacade(ServerFacadeInterface systemStatusFacade){
-        StatusController.dataSource = systemStatusFacade;
+    public static void setSystemInfoFacade(ServerFacadeInterface serverFacade){
+        StatusController.dataSource = serverFacade;
     }
 }

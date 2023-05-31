@@ -20,7 +20,7 @@ public class AvailableProcessorsDecorator  implements ServerStatus {
 
     @Override
     public Integer getRequestCost() {
-        return serverStatus.getRequestCost();// + 3;
+        return serverStatus.getRequestCost() + 3;
     }
 
     @Override

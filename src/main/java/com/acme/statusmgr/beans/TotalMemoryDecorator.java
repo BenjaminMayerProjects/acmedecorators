@@ -19,13 +19,13 @@ public class TotalMemoryDecorator implements ServerStatus {
 
 
     public Integer getRequestCost() {
-        return serverStatus.getRequestCost();// + 13;
+        return serverStatus.getRequestCost() + 13;
     }
 
 
     public String getStatusDesc() {
-        return serverStatus.getStatusDesc() + " and there are " + Runtime.getRuntime().freeMemory() +
-                " bytes of JVM memory free";
+        return serverStatus.getStatusDesc() + ", and there is a total of " + dataSource.getTotalMemory() +
+                "bytes of JVM memory";
     }
 
 
