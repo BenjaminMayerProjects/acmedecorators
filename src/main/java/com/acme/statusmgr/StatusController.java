@@ -31,7 +31,9 @@ public class StatusController {
 
     protected static final String template = "Server Status requested by %s";
     protected final AtomicLong counter = new AtomicLong();
-    protected ServerFacadeInterface dataSource;
+    private static ServerFacadeInterface dataSource = new ServerFacade();
+
+
 
     /**
      * Process a request for server status information
@@ -99,8 +101,7 @@ public class StatusController {
         }
         return detailedStatus;
     }
-    public void setDataSource(ServerFacadeInterface dataSource)
-    {
-        this.dataSource = dataSource;
+    public static void setSystemInfoFacade(ServerFacadeInterface systemStatusFacade){
+        StatusController.dataSource = systemStatusFacade;
     }
 }

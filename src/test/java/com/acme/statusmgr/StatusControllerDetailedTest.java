@@ -15,13 +15,16 @@
  */
 package com.acme.statusmgr;
 
+import com.acme.statusmgr.beans.BaseServerStatus;
 import com.acme.statusmgr.beans.ServerFacadeInterface;
+import com.acme.statusmgr.beans.ServerStatus;
 import com.acme.statusmgr.beans.ServerTestFacade;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -47,8 +50,8 @@ public class StatusControllerDetailedTest {
      */
     @BeforeAll
     public static void beforeAll() {
-        StatusController testController = new StatusController();
-        testController.setDataSource(new ServerTestFacade());
+
+        StatusController.setSystemInfoFacade(new ServerTestFacade());
     }
 
 

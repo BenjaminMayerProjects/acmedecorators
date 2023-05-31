@@ -7,7 +7,8 @@ import com.acme.servermgr.ServerManager;
  */
 public class BaseServerStatus implements ServerStatus {
     private long id;                // Unique identifier of request, sequential number
-    private String contentHeader;   // Some info about the request
+    private ServerFacadeInterface dataSource;
+    private String contentHeader;// Some info about the request
     /**
      * requestCost constant will have to be changed if we change costs or calc dynamically
      */
@@ -23,10 +24,12 @@ public class BaseServerStatus implements ServerStatus {
     public BaseServerStatus(long id, String contentHeader) {
         this.id = id;
         this.contentHeader = contentHeader;
+        dataSource = new ServerFacade();
     }
 
-    public BaseServerStatus() {
-
+    public void setDataSource(ServerFacadeInterface dataSource)
+    {
+        this.dataSource = dataSource;
     }
 
     /**
